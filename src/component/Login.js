@@ -1,26 +1,24 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter as Redirect } from 'react-router-dom';
+import { BrowserRouter, Redirect } from 'react-router-dom';
 import './Login.css'
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = { fields: { email: 'aewf@mail.by', password: 'faewEF213' }, errors: {} };
-    this.login = props.login;
 
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleFormSubmitted = this.handleFormSubmitted.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleValidation = this.handleValidation.bind(this);
   }
 
-  handleInputChange(event) {
+  handleChange(event) {
     let fields = this.state.fields;
     const target = event.target;
 
     fields[target.name] = target.value;
     this.setState({fields})
-    console.log(this.state)
   }
 
   handleValidation() {
@@ -50,39 +48,33 @@ export default class Login extends Component {
 
     this.setState({ errors: errors });
 
-    if (isValid) {
-      window.localStorage.setItem('email', this.state.fields['email']);
-      this.login();
-    }
-
     return isValid;
   }
 
-  handleFormSubmitted(event) {
+  handleSubmit(event) {
     event.preventDefault();
 
     if(this.handleValidation()) {
-      return <Redirect to='/home' />
-    } else {
-      console.log('handleFormSubmitted false')
+      window.localStorage.setItem('email', this.state.fields['email']);
+      this.props.login();
     }
   }
 
   render() {
-    return (
-      <div className='login'>
-        <form>
-          <label>
-            <input className={ this.state.errors['email'] ? 'error' : '' } type='email' name='email' placeholder='Email' value={this.state.fields['email']} onChange={this.handleInputChange}/>
-            <span style={{ color: "red" }}>{this.state.errors["email"]}</span>
-          </label>
-          <label>
-            <input className={ this.state.errors['password'] ? 'error' : '' } type='password' name='password' placeholder='Пароль' value={this.state.fields['password']} onChange={this.handleInputChange}/>
-            <span style={{ color: "red" }}>{this.state.errors["password"]}</span>
-          </label>
-          <button onClick={this.handleFormSubmitted}>Увайсці</button>
-        </form>
-      </div>
-    )
+    return !this.props.logged
+      ? <div className='login'>
+          <form>
+            <label>
+              <input className={ this.state.errors['email'] ? 'error' : '' } type='email' name='email' placeholder='Email' value={this.state.fields.email} onChange={this.handleChange}/>
+              <span style={{ color: "red" }}>{this.state.errors["email"]}</span>
+            </label>
+            <label>
+              <input className={ this.state.errors['password'] ? 'error' : '' } type='password' name='password' placeholder='Пароль' value={this.state.fields.password} onChange={this.handleChange}/>
+              <span style={{ color: "red" }}>{this.state.errors["password"]}</span>
+            </label>
+            <button onClick={this.handleSubmit}>Увайсці</button>
+          </form>
+        </div>
+      : <Redirect to="/" />
   }
 }

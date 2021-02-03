@@ -1,0 +1,38 @@
+#root .container {
+  /*margin-top: 100px;*/
+  /*padding: 40px;*/
+  text-align: center;
+  /*background-color: #eee;*/
+}
+
+nav ul {
+  text-align: center;
+}
+
+nav ul li {
+  display: inline-block;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+nav ul li a {
+  color: #111;
+  text-decoration: none;
+}
+
+nav ul li button {
+  border: none;
+  font-size: 20px;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.container h1 {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 1.5em;
+  font-weight: bold;
+}
