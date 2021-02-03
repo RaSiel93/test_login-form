@@ -12,6 +12,7 @@ import Home from './Home'
 import Login from './Login'
 import Todo from './Todo'
 import Player from './Player'
+import Clock from './Clock'
 
 export default class App extends PureComponent {
   constructor(props) {
@@ -48,6 +49,9 @@ export default class App extends PureComponent {
                 <Link to="/player">Player</Link>
               </li>
               <li>
+                <Link to="/clock">Clock</Link>
+              </li>
+              <li>
                 <button onClick={this.logout}>Logout</button>
               </li>
             </ul>
@@ -71,6 +75,12 @@ export default class App extends PureComponent {
               this.state.logged &&
                 <Route path="/player">
                   <Player />
+                </Route>
+            }
+            {
+              this.state.logged &&
+                <Route path="/clock">
+                  <Clock />
                 </Route>
             }
             <Route path="/login">

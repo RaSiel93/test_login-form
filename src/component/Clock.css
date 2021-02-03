@@ -1,0 +1,38 @@
+.clock-container {
+  height: calc(100vh - 45px);
+  width: 100vw;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clock {
+  position: relative;
+}
+
+.clock div {
+  position: absolute;
+  height: 194px;
+  top: 5px;
+  transform-origin: center bottom;
+}
+
+.second {
+  width: 5px;
+  background-color: #f00;
+  left: 198px;
+}
+
+.minute {
+  width: 7px;
+  background-color: #ff0;
+  left: 196px;
+}
+
+.hour {
+  position: absolute;
+  width: 11px;
+  background-color: #ccc;
+  left: 194px;
+}
